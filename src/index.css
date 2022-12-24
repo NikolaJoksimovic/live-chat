@@ -2,7 +2,7 @@
 
 :root {
   --clr-primary: rgb(255, 255, 255);
-  --clr-secondary: rgb(128, 58, 25);
+  --clr-secondary: rgb(14, 90, 86);
   --clr-font-primary: white;
   --padding-page: 2em;
   --padding-div: 1em;
@@ -105,10 +105,11 @@ button {
 .send-msg-btn {
   position: absolute;
   right: 0;
-  transform: translateX(-2.5em);
-  width: 2.5em;
-  height: 2.5em;
-  background-color: transparent;
+  transform: translateX(-2.55em);
+  width: 2.35em;
+  height: 2.35em;
+  background-color: var(--clr-secondary);
+  color: var(--clr-font-primary);
   border: none;
   border-left: 0.15rem solid black;
   text-align: center;

@@ -10,13 +10,14 @@ const socket = io(`${url}`, {});
 function App() {
   const [username, setUsername] = useState<string>("");
   const [roomId, setRoomId] = useState<string>("");
-  const [showChat, setShowChat] = useState<boolean>(true);
+  const [showChat, setShowChat] = useState<boolean>(false);
 
   const joinRoom = () => {
     if (username && roomId) {
       console.log(roomId);
 
       socket.emit("join_room", { room_id: roomId });
+      setShowChat(true);
     }
   };
 
@@ -39,7 +40,12 @@ function App() {
         <button onClick={joinRoom}>join</button>
       </div>
       {showChat && (
-        <Chats socket={socket} username={username} roomId={roomId}></Chats>
+        <Chats
+          socket={socket}
+          username={username}
+          roomId={roomId}
+          setShowChat={setShowChat}
+        ></Chats>
       )}
     </div>
   );

@@ -6,6 +6,7 @@ type chatsProps = {
   socket: Socket;
   username: string;
   roomId: string;
+  setShowChat: React.Dispatch<React.SetStateAction<boolean>>;
 };
 type receivedMessageProps = {
   room_id: string;
@@ -14,7 +15,7 @@ type receivedMessageProps = {
   time: string;
 };
 
-const Chats = ({ socket, username, roomId }: chatsProps) => {
+const Chats = ({ socket, username, roomId, setShowChat }: chatsProps) => {
   const [currentMessage, setCurrentMessage] = useState<string>("");
 
   const sendMessage = async (message: string) => {
@@ -32,6 +33,10 @@ const Chats = ({ socket, username, roomId }: chatsProps) => {
     }
   };
 
+  const handleClick = () => {
+    setShowChat(false);
+  };
+
   useEffect(() => {
     socket.on("receive_message", (data: receivedMessageProps) => {
       console.log(data);
@@ -42,7 +47,7 @@ const Chats = ({ socket, username, roomId }: chatsProps) => {
       <div></div>
       <div className='chat-header'>
         <span style={{ padding: "0 0 0 1.5em" }}>live chat</span>
-        <button className='exit-btn'>
+        <button className='exit-btn' onClick={() => handleClick()}>
           <HiOutlineX></HiOutlineX>
         </button>
       </div>
