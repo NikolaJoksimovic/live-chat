@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
-import { HiOutlineX } from "react-icons/hi";
+import { HiPhone, HiOutlineDotsVertical } from "react-icons/hi";
+import { IoMdArrowBack } from "react-icons/io";
+import { BsPaperclip } from "react-icons/bs";
+
 import { nanoid } from "nanoid";
 import Msg from "./Msg";
 
@@ -59,10 +62,29 @@ const Chats = ({ socket, username, roomId, setShowChat }: chatsProps) => {
     <div className='chat-container'>
       <div></div>
       <div className='chat-header'>
-        <span style={{ padding: "0 0 0 1.5em" }}>live chat</span>
-        <button className='exit-btn' onClick={() => handleClick()}>
-          <HiOutlineX></HiOutlineX>
-        </button>
+        <div className='chat-header-left center-flex-row'>
+          <button onClick={handleClick}>
+            <IoMdArrowBack></IoMdArrowBack>
+          </button>
+          <div className='img-container'>
+            <img
+              src='https://images.pexels.com/photos/3764119/pexels-photo-3764119.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+              alt=''
+            />
+          </div>
+          <span>sanskriti</span>
+        </div>
+        <div className='chat-header-right center-flex-row'>
+          <div className='icon'>
+            <HiPhone></HiPhone>
+          </div>
+          <div className='icon' style={{ transform: "rotate(-45deg)" }}>
+            <BsPaperclip></BsPaperclip>
+          </div>
+          <div className='icon'>
+            <HiOutlineDotsVertical></HiOutlineDotsVertical>
+          </div>
+        </div>
       </div>
       <div className='chat-body'>
         {msgLog?.map((msg) => {
