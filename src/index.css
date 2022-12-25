@@ -89,9 +89,11 @@ button {
   color: var(--clr-font-primary);
 }
 .chat-body {
+  padding: var(--padding-input);
   border: 0.15rem solid black;
   height: calc(100vh - 10em);
   overflow-y: scroll;
+  text-align: left;
 }
 .chat-footer input {
   position: relative;

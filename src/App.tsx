@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import Chats from "./components/Chats";
 import urls from "./urls.json";
@@ -14,12 +14,25 @@ function App() {
 
   const joinRoom = () => {
     if (username && roomId) {
-      console.log(roomId);
+      // console.log(roomId);
+      window.localStorage.setItem("username", username);
+      window.localStorage.setItem("roomId", roomId);
 
       socket.emit("join_room", { room_id: roomId });
       setShowChat(true);
     }
   };
+
+  useEffect(() => {
+    const username = localStorage.getItem("username");
+    const roomId = localStorage.getItem("roomId");
+    console.log(username, roomId);
+
+    if (username && roomId) {
+      socket.emit("join_room", { room_id: roomId });
+      setShowChat(true);
+    }
+  }, []);
 
   return (
     <div className='App'>

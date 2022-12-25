@@ -17,6 +17,7 @@ type receivedMessageProps = {
 
 const Chats = ({ socket, username, roomId, setShowChat }: chatsProps) => {
   const [currentMessage, setCurrentMessage] = useState<string>("");
+  const [msgLog, setMsgLog] = useState<receivedMessageProps>();
 
   const sendMessage = async (message: string) => {
     if (message !== "") {
@@ -34,11 +35,15 @@ const Chats = ({ socket, username, roomId, setShowChat }: chatsProps) => {
   };
 
   const handleClick = () => {
+    localStorage.removeItem("username");
+    localStorage.removeItem("roomId");
     setShowChat(false);
   };
 
   useEffect(() => {
+    // console.log("data received from server");
     socket.on("receive_message", (data: receivedMessageProps) => {
+      setMsgLog(data);
       console.log(data);
     });
   }, [socket]);
@@ -51,12 +56,14 @@ const Chats = ({ socket, username, roomId, setShowChat }: chatsProps) => {
           <HiOutlineX></HiOutlineX>
         </button>
       </div>
-      <div className='chat-body'></div>
+      <div className='chat-body'>
+        <h5>this is a message...</h5>
+      </div>
       <div className='chat-footer'>
         <input
           className='message-input'
           type='text'
-          placeholder='heyyy'
+          placeholder='Type something...'
           onChange={(event) => setCurrentMessage(event.target.value)}
         />
         <button
