@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Socket } from "socket.io-client";
+import { nanoid } from "nanoid";
 import { HiPhone, HiOutlineDotsVertical } from "react-icons/hi";
 import { IoMdArrowBack } from "react-icons/io";
-import { BsPaperclip } from "react-icons/bs";
-
-import { nanoid } from "nanoid";
+import { BsPaperclip, BsEmojiLaughing, BsCameraFill } from "react-icons/bs";
+import { FaMicrophone } from "react-icons/fa";
 import Msg from "./Msg";
 
 type chatsProps = {
@@ -23,6 +23,8 @@ export type receivedMessageProps = {
 const Chats = ({ socket, username, roomId, setShowChat }: chatsProps) => {
   const [currentMessage, setCurrentMessage] = useState<string>("");
   const [msgLog, setMsgLog] = useState<receivedMessageProps[]>([]);
+  const chatHeaderRef = useRef<HTMLDivElement>(null);
+  const [headerHeight, setHeaderHeight] = useState<number>(0);
 
   const sendMessage = async (message: string) => {
     if (message !== "") {
@@ -58,10 +60,16 @@ const Chats = ({ socket, username, roomId, setShowChat }: chatsProps) => {
     });
   }, [socket]);
 
+  useEffect(() => {
+    // console.log(chatHeaderRef.current?.clientHeight);
+    const value = chatHeaderRef.current?.clientHeight || 52;
+    setHeaderHeight(value);
+  }, []);
+
   return (
     <div className='chat-container'>
       <div></div>
-      <div className='chat-header'>
+      <div className='chat-header' ref={chatHeaderRef}>
         <div className='chat-header-left center-flex-row'>
           <button onClick={handleClick}>
             <IoMdArrowBack></IoMdArrowBack>
@@ -86,7 +94,7 @@ const Chats = ({ socket, username, roomId, setShowChat }: chatsProps) => {
           </div>
         </div>
       </div>
-      <div className='chat-body'>
+      <div className='chat-body' style={{ paddingTop: `${headerHeight}px` }}>
         {msgLog?.map((msg) => {
           return (
             <h5
@@ -103,19 +111,29 @@ const Chats = ({ socket, username, roomId, setShowChat }: chatsProps) => {
         })}
       </div>
       <div className='chat-footer'>
-        <input
-          className='message-input'
-          type='text'
-          placeholder='Type something...'
-          onChange={(event) => setCurrentMessage(event.target.value)}
-          value={currentMessage}
-        />
-        <button
-          className='send-msg-btn'
-          onClick={() => sendMessage(currentMessage)}
-        >
-          &#9658;
-        </button>
+        <div className='chat-footer-left'>
+          <div className='emoji-btn'>
+            <BsEmojiLaughing></BsEmojiLaughing>
+          </div>
+          <input
+            className='message-input'
+            type='text'
+            onChange={(event) => setCurrentMessage(event.target.value)}
+            value={currentMessage}
+            placeholder='Type a message'
+          />
+          <div className='camera-btn'>
+            <BsCameraFill></BsCameraFill>
+          </div>
+        </div>
+        <div className='btn-container'>
+          <button
+            className='send-msg-btn center-flex-row'
+            onClick={() => sendMessage(currentMessage)}
+          >
+            <FaMicrophone></FaMicrophone>
+          </button>
+        </div>
       </div>
     </div>
   );

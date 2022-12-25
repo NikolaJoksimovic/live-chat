@@ -2,6 +2,7 @@
 
 :root {
   --clr-white: #ffff;
+  --clr-gray: rgb(134, 134, 134);
   --clr-teal-green: #128c7e;
   --clr-teal-green-dark: #075e54;
   --clr-light-green: #25d366;
@@ -41,11 +42,17 @@ button {
   top: 0;
   left: 0;
   width: 100vw;
-  min-height: 100vh;
+  height: 100vh;
+  overflow-y: scroll;
   background: url("./images/chat_background.png") center/cover no-repeat;
 }
 /* header */
 .chat-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+
   display: flex;
   align-items: center;
   background-color: #075e54;
@@ -93,3 +100,66 @@ button {
 }
 /* body */
 /* footer */
+.chat-footer {
+  position: fixed;
+  bottom: 0.5em;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  padding: 0.5em;
+}
+.chat-footer-left {
+  position: relative;
+  display: flex;
+  flex-grow: 1;
+  background-color: var(--clr-white);
+  border-radius: 5px;
+  padding: 0.4em;
+}
+.chat-footer-left::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -0.5em;
+  border: 0.5em solid transparent;
+  border-radius: 5px;
+  border-top-color: var(--clr-white);
+}
+.chat-footer input {
+  height: 2.2em;
+  width: 80%;
+  padding: 0.5em;
+  border: none;
+  font-size: 1em;
+}
+.chat-footer input:focus {
+  outline: none;
+}
+.btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+.emoji-btn,
+.camera-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2em;
+  width: 2em;
+  color: var(--clr-gray);
+  font-size: 1.5em;
+}
+
+.send-msg-btn {
+  height: 2.2em;
+  width: 2.2em;
+  border: none;
+  border-radius: 100%;
+  margin: 0 0 0 0.5em;
+  background-color: var(--clr-teal-green);
+  color: var(--clr-white);
+  font-size: 1.5em;
+}
