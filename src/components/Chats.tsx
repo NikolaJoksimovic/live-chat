@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
 import { HiOutlineX } from "react-icons/hi";
+import { nanoid } from "nanoid";
+import Msg from "./Msg";
 
 type chatsProps = {
   socket: Socket;
@@ -8,7 +10,7 @@ type chatsProps = {
   roomId: string;
   setShowChat: React.Dispatch<React.SetStateAction<boolean>>;
 };
-type receivedMessageProps = {
+export type receivedMessageProps = {
   room_id: string;
   username: string;
   message: string;
@@ -17,7 +19,7 @@ type receivedMessageProps = {
 
 const Chats = ({ socket, username, roomId, setShowChat }: chatsProps) => {
   const [currentMessage, setCurrentMessage] = useState<string>("");
-  const [msgLog, setMsgLog] = useState<receivedMessageProps>();
+  const [msgLog, setMsgLog] = useState<receivedMessageProps[]>([]);
 
   const sendMessage = async (message: string) => {
     if (message !== "") {
@@ -30,23 +32,29 @@ const Chats = ({ socket, username, roomId, setShowChat }: chatsProps) => {
           ":" +
           new Date(Date.now()).getMinutes(),
       };
+      setMsgLog((prevMsgLog: receivedMessageProps[]) => [
+        ...prevMsgLog,
+        packageData,
+      ]);
+      setCurrentMessage("");
       await socket.emit("send_message", packageData);
     }
   };
 
   const handleClick = () => {
-    localStorage.removeItem("username");
-    localStorage.removeItem("roomId");
+    // localStorage.removeItem("username");
+    // localStorage.removeItem("roomId");
     setShowChat(false);
   };
 
   useEffect(() => {
-    // console.log("data received from server");
     socket.on("receive_message", (data: receivedMessageProps) => {
-      setMsgLog(data);
       console.log(data);
+
+      setMsgLog((prevMsgLog: receivedMessageProps[]) => [...prevMsgLog, data]);
     });
   }, [socket]);
+
   return (
     <div className='chat-container'>
       <div></div>
@@ -57,7 +65,20 @@ const Chats = ({ socket, username, roomId, setShowChat }: chatsProps) => {
         </button>
       </div>
       <div className='chat-body'>
-        <h5>this is a message...</h5>
+        {msgLog?.map((msg) => {
+          return (
+            <h5
+              key={nanoid()}
+              className={
+                username === msg.username
+                  ? "msg-right msg-header"
+                  : "msg-left msg-header"
+              }
+            >
+              <Msg {...msg}></Msg>
+            </h5>
+          );
+        })}
       </div>
       <div className='chat-footer'>
         <input
@@ -65,6 +86,7 @@ const Chats = ({ socket, username, roomId, setShowChat }: chatsProps) => {
           type='text'
           placeholder='Type something...'
           onChange={(event) => setCurrentMessage(event.target.value)}
+          value={currentMessage}
         />
         <button
           className='send-msg-btn'

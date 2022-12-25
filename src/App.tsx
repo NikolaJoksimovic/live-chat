@@ -15,8 +15,8 @@ function App() {
   const joinRoom = () => {
     if (username && roomId) {
       // console.log(roomId);
-      window.localStorage.setItem("username", username);
-      window.localStorage.setItem("roomId", roomId);
+      // window.localStorage.setItem("username", username);
+      // window.localStorage.setItem("roomId", roomId);
 
       socket.emit("join_room", { room_id: roomId });
       setShowChat(true);
@@ -24,14 +24,12 @@ function App() {
   };
 
   useEffect(() => {
-    const username = localStorage.getItem("username");
-    const roomId = localStorage.getItem("roomId");
-    console.log(username, roomId);
-
-    if (username && roomId) {
-      socket.emit("join_room", { room_id: roomId });
-      setShowChat(true);
-    }
+    // const username = localStorage.getItem("username");
+    // const roomId = localStorage.getItem("roomId");
+    // if (username && roomId) {
+    //   socket.emit("join_room", { room_id: roomId });
+    //   setShowChat(true);
+    // }
   }, []);
 
   return (
