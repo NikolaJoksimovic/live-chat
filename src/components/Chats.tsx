@@ -80,7 +80,7 @@ const Chats = ({ socket, username, roomId, setShowChat }: chatsProps) => {
               alt=''
             />
           </div>
-          <span>sanskriti</span>
+          <span>{username}</span>
         </div>
         <div className='chat-header-right center-flex-row'>
           <div className='icon'>

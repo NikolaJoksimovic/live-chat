@@ -5,9 +5,7 @@ const Msg = (msg: receivedMessageProps) => {
     <>
       <span>
         {msg.message}
-        <p>
-          {msg.username} {msg.time}
-        </p>
+        <p>{msg.time}</p>
       </span>
     </>
   );
