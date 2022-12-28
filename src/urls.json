@@ -1,5 +1,5 @@
 {
   "url": "http://localhost:8000/",
-  "production": "http://localhost:8000/",
-  "testing": ""
+  "production": "",
+  "testing": "http://localhost:8000/"
 }

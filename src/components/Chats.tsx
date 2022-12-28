@@ -62,7 +62,7 @@ const Chats = ({ socket, username, roomId, setShowChat }: chatsProps) => {
 
   useEffect(() => {
     // console.log(chatHeaderRef.current?.clientHeight);
-    const value = chatHeaderRef.current?.clientHeight || 52;
+    const value = (chatHeaderRef.current?.clientHeight || 52) + 5;
     setHeaderHeight(value);
   }, []);
 
@@ -76,7 +76,7 @@ const Chats = ({ socket, username, roomId, setShowChat }: chatsProps) => {
           </button>
           <div className='img-container'>
             <img
-              src='https://images.pexels.com/photos/3764119/pexels-photo-3764119.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+              src='https://upload.wikimedia.org/wikipedia/sr/7/7e/%D0%9B%D0%BE%D0%B3%D0%BE_%D0%B5%D0%A3%D0%BF%D1%80%D0%B0%D0%B2%D0%B5.jpg'
               alt=''
             />
           </div>

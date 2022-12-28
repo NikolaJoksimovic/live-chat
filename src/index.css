@@ -9,6 +9,9 @@
   --clr-mint-green: #dcf8c6;
   --clr-blue: #34b7f1;
   --clr-font-primary: #ffff;
+  --clr-font-gray: #8b8b8b;
+
+  --shadow-bottom: 0 10px 1em 0.05em rgba(141, 141, 141, 0.267);
 }
 
 * {
@@ -59,6 +62,7 @@ button {
   align-items: center;
   background-color: #075e54;
   padding: 0.5em;
+  box-shadow: var(--shadow-bottom);
 }
 .chat-header-left {
   width: 55%;
@@ -106,7 +110,7 @@ button {
 }
 .msg-header {
   position: relative;
-  color: black;
+  color: #3b3b3b;
   font-weight: 500;
   display: flex;
 }
@@ -137,8 +141,26 @@ button {
   border-top-color: var(--clr-mint-green);
 }
 .msg-header span {
+  position: relative;
   padding: 0.3em 0.6em 0.3em 0.6em;
   border-radius: 5px;
+  font-size: 15px;
+  font-weight: 600;
+  box-shadow: var(--shadow-bottom);
+}
+.msg-header p {
+  font-size: 13px;
+  color: transparent;
+  display: inline-block;
+  margin: 0 0 0 0.8em;
+  padding-bottom: 0.4em;
+  font-weight: 500;
+}
+#true-time {
+  position: absolute;
+  right: 0.5em;
+  bottom: -0.2em;
+  color: var(--clr-font-gray);
 }
 .msg-left span {
   background-color: var(--clr-white);
@@ -164,6 +186,7 @@ button {
   background-color: var(--clr-white);
   border-radius: 5px;
   padding: 0.4em;
+  box-shadow: var(--shadow-bottom);
 }
 .chat-footer-left::after {
   content: "";
