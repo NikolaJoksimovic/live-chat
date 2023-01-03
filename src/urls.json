@@ -1,5 +1,5 @@
 {
-  "url": "http://localhost:8000/",
-  "production": "",
+  "url": "https://live-chat-czn9.onrender.com/",
+  "production": "https://live-chat-czn9.onrender.com/",
   "testing": "http://localhost:8000/"
 }
