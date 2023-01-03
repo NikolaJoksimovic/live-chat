@@ -6,6 +6,7 @@ import { IoMdArrowBack } from "react-icons/io";
 import { BsPaperclip, BsEmojiLaughing, BsCameraFill } from "react-icons/bs";
 import { FaMicrophone } from "react-icons/fa";
 import Msg from "./Msg";
+import customImg from "../images/250895928_4172921376145604_979766070934381294_n.jpg";
 
 type chatsProps = {
   socket: Socket;
@@ -75,10 +76,7 @@ const Chats = ({ socket, username, roomId, setShowChat }: chatsProps) => {
             <IoMdArrowBack></IoMdArrowBack>
           </button>
           <div className='img-container'>
-            <img
-              src='https://upload.wikimedia.org/wikipedia/sr/7/7e/%D0%9B%D0%BE%D0%B3%D0%BE_%D0%B5%D0%A3%D0%BF%D1%80%D0%B0%D0%B2%D0%B5.jpg'
-              alt=''
-            />
+            <img src={customImg} alt='profile_photo.jpg' />
           </div>
           <span>{username}</span>
         </div>
