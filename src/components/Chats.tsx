@@ -6,7 +6,7 @@ import { IoMdArrowBack } from "react-icons/io";
 import { BsPaperclip, BsEmojiLaughing, BsCameraFill } from "react-icons/bs";
 import { FaMicrophone } from "react-icons/fa";
 import Msg from "./Msg";
-import customImg from "../images/250895928_4172921376145604_979766070934381294_n.jpg";
+import customImg from "../images/julija.png";
 
 type chatsProps = {
   socket: Socket;
